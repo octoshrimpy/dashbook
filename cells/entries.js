@@ -99,7 +99,7 @@ Entry.loadFromJSON([
               },
               {
                 name: "a bard's tail",
-                summary: "the town's local theatre. also used for magic duels",
+                summary: "the town's local theatre, run by tiny dragons. also used for magic duels",
                 type: "place",
                 subtype: "entertainment",
               }
