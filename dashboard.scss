@@ -1,0 +1,137 @@
+// https://jsonformatter.org/scss-to-css
+
+$code-background: #112435;
+$dash-font-height: 0.9rem;
+$dash-font-width: $dash-font-height * 0.5;
+$active-bright: #5DA6F8;
+$active: #337BCD;
+$passive: #1F4A7B;
+$grey-blue: #6481A1;
+$text-color: darken($grey-blue, 20%);
+
+.html-ctr-dashboard {
+  background: $code-background;
+  width: 100%;
+  height: 100%;
+  &, * { box-sizing: border-box; }
+
+  .ctr-dashboard {
+    margin: 0;
+    background: $code-background;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    color: lightgrey;
+    font-family: "terminess", monospace;
+    font-size: $dash-font-height;
+    text-align: center;
+  }
+}
+
+.dashboard-omnibar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+
+  input[type=text] {
+    margin: 4px auto;
+    border: 2px solid rgba($grey-blue, 0.5);
+    border-radius: 4px;
+    background: $code-background;
+    padding: 8px;
+    width: 100%;
+    color: lightgrey;
+    font-family: monospace;
+    font-size: 18px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+@keyframes flashdash {
+  0%   { border-color: $passive; }
+  10%  { border-color: $active; }
+  100% { border-color: $passive; }
+}
+@keyframes flashdashactive {
+  0%   { border-color: $active; }
+  10%  { border-color: $active-bright; }
+  100% { border-color: $active; }
+}
+
+.dashboard {
+  row-gap: $dash-font-height;
+  display: inline-grid;
+  grid-template-columns: repeat(4, 241px);
+  grid-template-rows: repeat(5, 144px);
+  column-gap: 3px;
+  transition: border-color 1s;
+  text-align: left;
+
+  .dash-cell {
+    position: relative;
+    border: 2px solid $passive;
+    border-radius: 4px;
+    padding: 5px 3px;
+    width: 100%;
+    height: 100%;
+
+    &.flash {
+      animation: 1s ease-out flashdash;
+    }
+    &.active {
+      border-color: $active;
+
+      &.flash {
+        animation: 1s ease-out flashdashactive;
+      }
+    }
+    &.hide {
+      display: none;
+    }
+    .dash-title {
+      position: absolute;
+      top: -10px;
+      width: 100%;
+      text-align: center;
+
+      span {
+        background: $code-background;
+        padding: 0 5px;
+        height: $dash-font-height;
+        line-height: $dash-font-height;
+      }
+    }
+
+    .dash-content {
+      max-height: 100%;
+      overflow: hidden;
+      line-height: $dash-font-height;
+      white-space: pre-wrap;
+
+      * {
+        display: inline-block;
+        line-height: $dash-font-height;
+      }
+      span {
+        display: inline;
+      }
+      e, es {
+        display: inline-block;
+        width: $dash-font-width;
+        height: $dash-font-height;
+        line-height: $dash-font-height;
+      }
+      e { // Double width
+        width: $dash-font-width*2;
+        font-family: emoji;
+        // font-size: $dash-font-height*0.75;
+      }
+    }
+  }
+}
