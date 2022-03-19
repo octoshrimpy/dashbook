@@ -60,15 +60,31 @@ Entry.prototype.path = function() {
   return path_arr.reverse().join("/")
 }
 
-$(".ctr-dashboard").ready(function() {
-  $(".dashboard-omnibar input").on("keyup", function(evt) {
-    $(".drop-item").remove()
-    Entry.search($(this).val()).forEach(function(entry) {
-      var drop_item = $("<div>", { class: "drop-item" }).text(entry.path())
-      var summary = $("<div>", { class: "summary" }).text(entry.summary)
-      if (entry.summary && entry.summary.length > 0) { drop_item.append(summary) }
+var omnisearch = function() {
+  $(".drop-item").remove()
+  Entry.search($(this).val()).forEach(function(entry) {
+    var item_name = $("<span>", { class: "name" }).text(entry.path())
+    var drop_item = $("<div>", { class: "drop-item" }).append(item_name)
+    var summary = $("<div>", { class: "summary" }).text(entry.summary)
+    if (entry.summary && entry.summary.length > 0) { drop_item.append(summary) }
 
-      $(".dropup").append(drop_item)
-    })
+    $(".dropup").append(drop_item)
+  })
+}
+
+$(".ctr-dashboard").ready(function() {
+  $(".dashboard-omnibar input").on("keyup", function() {
+    omnisearch.call(this)
+  }).blur(function() {
+    $(".drop-item").remove()
+  }).focus(function() {
+    omnisearch.call(this)
+  })
+  $(document).on("mouseover", ".drop-item", function() {
+    $(".drop-item").removeClass("selected")
+    $(this).addClass("selected")
+  }).on("mousedown", ".drop-item", function() {
+    $(".dashboard-omnibar input").val($(this).children(".name").text())
+    $(".dashboard-omnibar input").focus()
   })
 })
