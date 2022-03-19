@@ -1,11 +1,15 @@
 $(".ctr-dashboard").ready(function() {
+  var idx = 0
   Cell.init({
     title: "Upcoming Notes",
     x: 1,
     y: 1,
     w: 1,
     h: 4,
+    data: { idx: idx += 1 },
     reloader: function(cell) {
+      $(cell.ele).children(".keeb").remove()
+      $(cell.ele).prepend($("<span>", { class: "keeb" }).text(cell.data.idx))
       cell.text(localStorage.getItem("notes"))
     },
     commands: {
@@ -31,26 +35,18 @@ $(".ctr-dashboard").ready(function() {
     }
   })
 
-  Cell.init({
-    title: "Audio",
-    x: 4,
-    y: 1,
-    w: 1,
-    h: 2,
-  })
-  Cell.init({
-    title: "Generators",
-    x: 4,
-    y: 3,
-    w: 1,
-    h: 2,
-  })
+
   Cell.init({
     title: "Notes",
     x: 2,
     y: 1,
     w: 2,
     h: 4,
+    data: { idx: idx += 1 },
+    reloader: function(cell) {
+      $(cell.ele).children(".keeb").remove()
+      $(cell.ele).prepend($("<span>", { class: "keeb" }).text(cell.data.idx))
+    },
     command: function(msg, cell) {
       if (msg == "-") {
         cell.lines(entries.map(function(entry) { return entry.name }))
@@ -58,5 +54,31 @@ $(".ctr-dashboard").ready(function() {
         cell.lines(Entry.search(msg))
       }
     }
+  })
+
+  Cell.init({
+    title: "Audio",
+    x: 4,
+    y: 1,
+    w: 1,
+    h: 2,
+    data: { idx: idx += 1 },
+    reloader: function(cell) {
+      $(cell.ele).children(".keeb").remove()
+      $(cell.ele).prepend($("<span>", { class: "keeb" }).text(cell.data.idx))
+    },
+  })
+
+  Cell.init({
+    title: "Generators",
+    x: 4,
+    y: 3,
+    w: 1,
+    h: 2,
+    data: { idx: idx += 1 },
+    reloader: function(cell) {
+      $(cell.ele).children(".keeb").remove()
+      $(cell.ele).prepend($("<span>", { class: "keeb" }).text(cell.data.idx))
+    },
   })
 })
