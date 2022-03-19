@@ -80,7 +80,6 @@
 }
 .dashboard-omnibar .dropup .drop-item.selected .summary {
   opacity: 0.75;
-  font-style: italic;
 }
 
 @-webkit-keyframes flashdash {
