@@ -24,4 +24,4 @@
 ### V4
 - [ ] host mode, with connected devices
 - [ ] players can connect and store their notes in same place (not localStorage)
-- [ ] notifications and messages from DM to players
+- [ ] notifications and messages from DM to players (use websockets)
