@@ -1,5 +1,16 @@
 $(".ctr-dashboard").ready(function() {
   var idx = 0
+  var populateKeeb = function(cell) {
+    $(cell.ele).children(".keeb").remove()
+    $(cell.ele).prepend(
+      $("<span>", {
+        class: "keeb",
+        dataIdx: cell.data.idx,
+        dataSelector: cell.name,
+      }).text(cell.data.idx)
+    )
+  }
+
   Cell.init({
     title: "Upcoming Notes",
     x: 1,
@@ -8,8 +19,7 @@ $(".ctr-dashboard").ready(function() {
     h: 4,
     data: { idx: idx += 1 },
     reloader: function(cell) {
-      $(cell.ele).children(".keeb").remove()
-      $(cell.ele).prepend($("<span>", { class: "keeb" }).text(cell.data.idx))
+      populateKeeb(cell)
       cell.text(localStorage.getItem("notes"))
     },
     commands: {
@@ -44,8 +54,7 @@ $(".ctr-dashboard").ready(function() {
     h: 4,
     data: { idx: idx += 1 },
     reloader: function(cell) {
-      $(cell.ele).children(".keeb").remove()
-      $(cell.ele).prepend($("<span>", { class: "keeb" }).text(cell.data.idx))
+      populateKeeb(cell)
     },
     command: function(msg, cell) {
       if (msg == "-") {
@@ -64,8 +73,7 @@ $(".ctr-dashboard").ready(function() {
     h: 2,
     data: { idx: idx += 1 },
     reloader: function(cell) {
-      $(cell.ele).children(".keeb").remove()
-      $(cell.ele).prepend($("<span>", { class: "keeb" }).text(cell.data.idx))
+      populateKeeb(cell)
     },
   })
 
@@ -77,8 +85,7 @@ $(".ctr-dashboard").ready(function() {
     h: 2,
     data: { idx: idx += 1 },
     reloader: function(cell) {
-      $(cell.ele).children(".keeb").remove()
-      $(cell.ele).prepend($("<span>", { class: "keeb" }).text(cell.data.idx))
+      populateKeeb(cell)
     },
   })
 })
