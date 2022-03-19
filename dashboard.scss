@@ -87,10 +87,10 @@ $text-color: darken($grey-blue, 20%);
       }
       
       &:first-of-type {
-        margin-top: 0.25rem;
+        margin-bottom: 0.25rem;
       }
       &:last-of-type {
-        margin-bottom: 0.25rem;
+        margin-top: 0.25rem;
       }
       &.selected {
         background: $passive;
