@@ -32,14 +32,14 @@ $(".ctr-dashboard").ready(function() {
   })
 
   Cell.init({
-    title: "Generators",
+    title: "Audio",
     x: 4,
     y: 1,
     w: 1,
     h: 2,
   })
   Cell.init({
-    title: "Audio",
+    title: "Generators",
     x: 4,
     y: 3,
     w: 1,
