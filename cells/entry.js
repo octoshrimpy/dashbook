@@ -1,11 +1,12 @@
 var notes
 entries = []
 Entry = function(data) {
+  // Make sure to escape all searchable chars (", >, :, .)
   this.name = data.name || ""
   this.summary = data.summary || ""
   this.description = data.description || ""
   this.type = data.type || "" // ["npc", "monster", "place", "item"]
-  this.subtype = data.subtype || "" // ["food", "weapon", "key", ...]
+  this.subtypes = data.subtypes || [] // ["food", "weapon", "key", ...]
   this.children = data.children || []
   this.parent = data.parent || null
 
@@ -20,7 +21,7 @@ Entry.loadFromObj = function(obj, parent) {
     summary: obj.summary,
     description: obj.description,
     type: obj.type,
-    subtype: obj.subtype,
+    subtypes: obj.subtypes,
     parent: parent,
   })
 
@@ -50,6 +51,9 @@ Entry.search = function(text) {
     var quotes = text.match(/\"(.*?)\"/)
     var query = quotes[1]
     var path = text.replace(quotes[0], "")
+  } else if (text.includes(">")) {
+    match_type = "type"
+    var [path, query] = text.split(">")
   } else {
     var segments = text.split("/")
     var query = segments.pop()
@@ -65,8 +69,10 @@ Entry.search = function(text) {
 
   if (match_type == "name") {
     var transformer = function() { return this.name }
+  } else if (match_type == "type") {
+    var transformer = function() { return [this.type, ...this.subtypes].join(" ") }
   } else if (match_type == "all") {
-    var transformer = function() { return this.allContent() }
+    var transformer = function() { return [this.name, this.summary, this.description].join(" ") }
   }
 
   return Text.filterOrder(query, options, transformer)
@@ -84,9 +90,6 @@ Entry.prototype.ancestors = function(include_self) {
 }
 Entry.prototype.path = function() {
   return this.ancestors(true).map(function(entry) { return entry.name }).join("/")
-}
-Entry.prototype.allContent = function(include_self) {
-  return [this.name, this.summary, this.description].join(" ")
 }
 
 var omnisearch = function() {
