@@ -1,16 +1,19 @@
 Entry.loadFromJSON([
   {
     name: "WorldA",
+    summary: "one of 3 goldilocks planets in the system",
     type: "place",
     subtype: "world",
     children: [
       {
-        name: "jurgaen",
+        name: "platheon",
+        summary: "continent filled with jungles",
         type: "place",
         subtype: "region",
         children: [
           {
-            name: "city jurgaen",
+            name: "jurgaen",
+            summary: "treehouse town just below the high canopies",
             type: "place",
             subtype: "city",
             children: [],
@@ -18,12 +21,14 @@ Entry.loadFromJSON([
         ]
       },
       {
-        name: "th'rom",
+        name: "u'thruk",
+        summary: "Volcanic land surrounded by lava flows",
         type: "place",
         subtype: "region",
         children: [
           {
-            name: "city th'rom",
+            name: "th'rom",
+            summary: "city deep underground, filling old empty lava tubes",
             type: "place",
             subtype: "city",
             children: [],
@@ -31,58 +36,14 @@ Entry.loadFromJSON([
         ]
       },
       {
-        name: "wryze-all",
+        name: "grethen",
+        summary: "north-most region of planet. usually covered in snow",
         type: "place",
         subtype: "region",
         children: [
           {
-            name: "city wryze-all",
-            type: "place",
-            subtype: "city",
-            children: [],
-          }
-        ]
-      }
-    ]
-  },
-  {
-    name: "WorldB",
-    type: "place",
-    subtype: "world",
-    children: [
-      {
-        name: "jurgaen",
-        type: "place",
-        subtype: "region",
-        children: [
-          {
-            name: "city jurgaen",
-            type: "place",
-            subtype: "city",
-            children: [],
-          }
-        ]
-      },
-      {
-        name: "th'rom",
-        type: "place",
-        subtype: "region",
-        children: [
-          {
-            name: "city th'rom",
-            type: "place",
-            subtype: "city",
-            children: [],
-          }
-        ]
-      },
-      {
-        name: "wryze-all",
-        type: "place",
-        subtype: "region",
-        children: [
-          {
-            name: "city wryze-all",
+            name: "wryze-all",
+            summary: "town of nomads, traversing the icy plains following the seals",
             type: "place",
             subtype: "city",
             children: [],
