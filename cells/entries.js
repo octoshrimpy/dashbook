@@ -16,21 +16,21 @@ Entry.loadFromJSON([
             summary: "ruthless mercenary from the jungles",
             description: "",
             type: "npc",
-            subtypes: ["bad]"
+            subtypes: ["bad"]
           },
           {
             name: "Crash",
             summary: "Underling for Johnny Slinger",
             description: "",
             type: "npc",
-            subtypes: ["bad]"
+            subtypes: ["bad"]
           },
           {
             name: "Cooper",
             summary: "Underling for Johnny Slinger",
             description: "",
             type: "npc",
-            subtypes: ["bad]"
+            subtypes: ["bad"]
           },
           {
             name: "jurgaen",
@@ -43,7 +43,7 @@ Entry.loadFromJSON([
                 summary: "thin, but muscled. clean-shaven",
                 description: "younger brother killed by Johnny Slinger",
                 type: "npc",
-                subtypes: ["good]"
+                subtypes: ["good"]
               },
               {
                 name: "Tilted Anvil",
