@@ -52,7 +52,7 @@
   background: #112435;
   width: 100%;
   display: flex;
-  padding: 0.25rem;
+  padding: 0 0.25rem;
   flex-direction: column-reverse;
 }
 .dashboard-omnibar .dropup .drop-item {
@@ -61,6 +61,12 @@
   display: flex;
   justify-content: flex-start;
   width: 100%;
+}
+.dashboard-omnibar .dropup .drop-item:first-of-type {
+  margin-top: 0.25rem;
+}
+.dashboard-omnibar .dropup .drop-item:last-of-type {
+  margin-bottom: 0.25rem;
 }
 .dashboard-omnibar .dropup .drop-item.selected {
   background: #1F4A7B;
