@@ -44,38 +44,40 @@ Entry.loadFromJSON = function(data, parent) {
 }
 Entry.search = function(text) {
   var options = entries
-  var match_type = "name"
+  text = text.replace(/^\/|\/$/g, "")
 
-  if (/\".*?\"/.test(text)) {
-    match_type = "all"
+  while (/\".*?\"/.test(text)) {
     var quotes = text.match(/\"(.*?)\"/)
     var query = quotes[1]
-    var path = text.replace(quotes[0], "")
-  } else if (text.includes(">")) {
-    match_type = "type"
-    var [path, query] = text.split(">")
-  } else {
-    var segments = text.split("/")
-    var query = segments.pop()
-    var path = segments.join("/")
+
+    text = text.replace(quotes[0], "")
+    options = Text.filterOrder(query, options, function() {
+      return [this.name, this.summary, this.description].join(" ")
+    })
   }
+
+  while (text.includes(">")) {
+    var query = text.split(">")[1].split(" ")[0]
+    text = text.replace(">" + query, "")
+
+    options = Text.filterOrder(query, options, function() {
+      return [this.type, ...this.subtypes].join(" ")
+    })
+  }
+
+  var segments = text.split("/")
+  var query = segments.pop()
+  var path = segments.join("/")
   path = path.trim().replace(/\/$/, "")
 
   if (path.length > 0) {
     options = options.filter(function(option) {
       return option.ancestors().map(function(entry) { return entry.path() }).includes(path)
     })
+    text = text.replace(path, "")
   }
 
-  if (match_type == "name") {
-    var transformer = function() { return this.name }
-  } else if (match_type == "type") {
-    var transformer = function() { return [this.type, ...this.subtypes].join(" ") }
-  } else if (match_type == "all") {
-    var transformer = function() { return [this.name, this.summary, this.description].join(" ") }
-  }
-
-  return Text.filterOrder(query, options, transformer)
+  return Text.filterOrder(text, options, function() { return this.path() })
 }
 Entry.prototype.ancestors = function(include_self) {
   var generation = include_self ? this : this.parent
