@@ -183,4 +183,66 @@
 .dashboard .dash-cell .dash-content e {
   width: 0.9rem;
   font-family: emoji;
+}
+
+.font-selector {
+  display: none;
+}
+.font-selector:checked ~ .ctr-dashboard {
+  font-family: "terminess", monospace;
+}
+.font-selector:checked ~ .ctr-dashboard .font-selector-label {
+  background: #112435;
+}
+.font-selector:checked ~ .ctr-dashboard .font-selector-label .bg:before {
+  background: #337BCD;
+  left: 1rem;
+}
+.font-selector:checked ~ .ctr-dashboard .font-selector-label .bg:after {
+  content: "Terminess";
+}
+
+.font-selector-label {
+  transition: all 0.15s ease-in-out;
+  border: 1px solid #337BCD;
+  cursor: pointer;
+  position: absolute;
+  right: 0.5rem;
+  bottom: 1rem;
+  opacity: 0.5;
+  background: #337BCD;
+  border-radius: 999px;
+  width: 2.5rem;
+  height: 1.5rem;
+}
+.font-selector-label .bg {
+  position: relative;
+}
+.font-selector-label .bg:before {
+  transition: all 0.15s ease-in-out;
+  content: "";
+  margin: 0.25rem;
+  left: 0rem;
+  display: inline;
+  position: absolute;
+  height: 0.9rem;
+  width: 1rem;
+  background: #112435;
+  border-radius: 999px;
+}
+.font-selector-label .bg:after {
+  transition: all 0.15s ease-in-out;
+  pointer-events: none;
+  opacity: 0;
+  content: "Jetbrains";
+  position: absolute;
+  right: calc(100% + 0.5rem);
+  top: 0.25rem;
+}
+.font-selector-label:hover {
+  opacity: 1;
+}
+.font-selector-label:hover .bg:after {
+  pointer-events: all;
+  opacity: 1;
 }/*# sourceMappingURL=dashboard.css.map */

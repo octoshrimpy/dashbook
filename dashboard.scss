@@ -174,3 +174,75 @@ $text-color: darken($grey-blue, 20%);
     }
   }
 }
+
+
+.font-selector {
+  display: none;
+  
+  &:checked ~ .ctr-dashboard{
+    font-family: "terminess", monospace;
+
+    .font-selector-label {
+      background: $code-background;
+      .bg {
+        &:before {
+          background: $active;
+          left: 1rem;
+        }
+        &:after {
+          content: "Terminess";
+        }
+      }
+    }
+  }
+}
+
+.font-selector-label {
+  @include animate;
+  border: 1px solid $active;
+  cursor: pointer;
+  position: absolute;
+  right: 0.5rem;
+  bottom: 1rem;
+  opacity: 0.5;
+
+  background: $active;
+  border-radius: 999px;
+  width: 2.5rem;
+  height: 1.5rem;
+
+  .bg {
+    position: relative;
+
+    &:before {
+      @include animate;
+      content: '';
+      margin: 0.25rem;
+      left: 0rem;
+      display: inline;
+      position: absolute;
+      height: 0.9rem;
+      width: 1rem;
+      background: $code-background;
+      border-radius: 999px;
+    }
+
+    &:after {
+      @include animate;
+      pointer-events: none;
+      opacity: 0;
+      content: "Jetbrains";
+      position: absolute;
+      right: calc(100% + 0.5rem);
+      top: 0.25rem;
+    }
+  }
+
+  &:hover {
+    opacity: 1;
+    .bg:after {
+      pointer-events: all;
+      opacity: 1;
+    }
+  }
+}
