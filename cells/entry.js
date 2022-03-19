@@ -73,7 +73,7 @@ var omnisearch = function() {
   $(".drop-item").remove()
   if ($(this).val().trim().length == 0) { return }
 
-  Entry.search($(this).val()).forEach(function(entry) {
+  Entry.search($(this).val()).slice(0, 10).forEach(function(entry) {
     var item_name = $("<span>", { class: "name" }).text(entry.path())
     var drop_item = $("<div>", { class: "drop-item" }).append(item_name)
     var summary = $("<div>", { class: "summary" }).text(entry.summary)
@@ -86,8 +86,10 @@ var omnisearch = function() {
 $(".ctr-dashboard").ready(function() {
   $(".ctr-dashboard").click(function() { $(".dashboard-omnibar input").focus() })
 
-  $(".dashboard-omnibar input").on("keyup", function() {
-    omnisearch.call(this)
+  $(".dashboard-omnibar input").on("keyup", function(evt) {
+    if (!["ArrowUp", "ArrowDown"].includes(evt.key)) {
+      omnisearch.call(this)
+    }
   }).blur(function() {
     $(".drop-item").remove()
   }).focus(function() {
@@ -95,26 +97,43 @@ $(".ctr-dashboard").ready(function() {
   }).on("keydown", function(evt) {
     if (evt.key == "ArrowUp") {
       evt.preventDefault()
+      evt.stopPropagation()
 
       if ($(".drop-item.selected").length > 0) {
-        var prev = $(".drop-item.selected").prev()
-        $(".drop-item").removeClass("selected")
-        prev.addClass("selected")
+        // next because CSS reverses order
+        var next = $(".drop-item.selected").next()
+        if (next) {
+          $(".drop-item").removeClass("selected")
+          next.addClass("selected")
+        }
       } else {
         // first because CSS reverses order
         $(".drop-item").first().addClass("selected")
       }
     } else if (evt.key == "ArrowDown") {
       evt.preventDefault()
+      evt.stopPropagation()
 
-      if (history_idx <= 0 && history_hold.length > 0) {
-        history_idx = -1
-        $(".dashboard-omnibar input").val(history_hold)
-        history_hold = ""
-      } else if (history_idx > 0) {
-        history_idx -= 1
-        $(".dashboard-omnibar input").val(dashboard_history[history_idx])
+      if ($(".drop-item.selected").length > 0) {
+        // prev because CSS reverses order
+        var prev = $(".drop-item.selected").prev()
+        if (prev) {
+          $(".drop-item").removeClass("selected")
+          prev.addClass("selected")
+        }
+      } else {
+        // first because CSS reverses order
+        $(".drop-item").last().addClass("selected")
       }
+    } else if (evt.key == "Tab") {
+      $(".dashboard-omnibar input").val($(".drop-item.selected").children(".name").text() + "/")
+      $(".dashboard-omnibar input").focus()
+    } else if (evt.key == "Escape") {
+      evt.preventDefault()
+      evt.stopPropagation()
+      $(".dashboard-omnibar input").blur()
+    } else {
+      console.log(evt.key);
     }
   })
 
