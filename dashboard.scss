@@ -77,6 +77,14 @@ $text-color: darken($grey-blue, 20%);
       display: flex;
       justify-content: flex-start;
       width: 100%;
+
+      .summary {
+        flex: 1;
+        display: flex;
+        opacity: 0.5;
+        font-style: italic;
+        justify-content: flex-end;
+      }
       
       &:first-of-type {
         margin-top: 0.25rem;
@@ -86,6 +94,11 @@ $text-color: darken($grey-blue, 20%);
       }
       &.selected {
         background: $passive;
+
+        .summary {
+          opacity: 0.75;
+          font-style: italic;
+        }
 
       }
     }
