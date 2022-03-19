@@ -29,7 +29,7 @@ function searchFor (item) {
 }
 
 function search () {
-    let searchTerm = searchbar.value 
+    let searchTerm = searchbar.value
     let item = searchFor(searchTerm)
 }
 
