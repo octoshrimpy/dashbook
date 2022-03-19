@@ -2,3 +2,7 @@
   font-family: "terminess";
   src: url("./terminess.ttf") format("opentype");
 }
+@font-face {
+  font-family: "jetbrains";
+  src: url("./jetbrains-nerd.ttf") format("opentype");
+}
