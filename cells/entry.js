@@ -43,9 +43,18 @@ Entry.loadFromJSON = function(data, parent) {
 }
 Entry.search = function(text) {
   var options = entries
+  var segments = text.split("/")
+  var last = segments.pop()
+
+  var path = segments.join("/")
+  if (segments.length > 0) {
+    options = options.filter(function(option) {
+      return option.path().toLowerCase().includes(path.toLowerCase())
+    })
+  }
 
   return Text.filterOrder(text, options, function() {
-    return this.name
+    return this.path()
   })
 }
 Entry.prototype.path = function() {
@@ -62,6 +71,8 @@ Entry.prototype.path = function() {
 
 var omnisearch = function() {
   $(".drop-item").remove()
+  if ($(this).val().trim().length == 0) { return }
+
   Entry.search($(this).val()).forEach(function(entry) {
     var item_name = $("<span>", { class: "name" }).text(entry.path())
     var drop_item = $("<div>", { class: "drop-item" }).append(item_name)
@@ -73,13 +84,40 @@ var omnisearch = function() {
 }
 
 $(".ctr-dashboard").ready(function() {
+  $(".ctr-dashboard").click(function() { $(".dashboard-omnibar input").focus() })
+
   $(".dashboard-omnibar input").on("keyup", function() {
     omnisearch.call(this)
   }).blur(function() {
     $(".drop-item").remove()
   }).focus(function() {
     omnisearch.call(this)
+  }).on("keydown", function(evt) {
+    if (evt.key == "ArrowUp") {
+      evt.preventDefault()
+
+      if ($(".drop-item.selected").length > 0) {
+        var prev = $(".drop-item.selected").prev()
+        $(".drop-item").removeClass("selected")
+        prev.addClass("selected")
+      } else {
+        // first because CSS reverses order
+        $(".drop-item").first().addClass("selected")
+      }
+    } else if (evt.key == "ArrowDown") {
+      evt.preventDefault()
+
+      if (history_idx <= 0 && history_hold.length > 0) {
+        history_idx = -1
+        $(".dashboard-omnibar input").val(history_hold)
+        history_hold = ""
+      } else if (history_idx > 0) {
+        history_idx -= 1
+        $(".dashboard-omnibar input").val(dashboard_history[history_idx])
+      }
+    }
   })
+
   $(document).on("mouseover", ".drop-item", function() {
     $(".drop-item").removeClass("selected")
     $(this).addClass("selected")
