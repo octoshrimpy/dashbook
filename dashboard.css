@@ -172,6 +172,21 @@
   height: 0.9rem;
   line-height: 0.9rem;
 }
+.dashboard .dash-cell .keeb {
+  position: absolute;
+  left: 0.5rem;
+  top: -10px;
+  background: #112435;
+  padding: 0 5px;
+  height: 0.9rem;
+  line-height: 0.9rem;
+}
+.dashboard .dash-cell .keeb:before {
+  content: "[";
+}
+.dashboard .dash-cell .keeb:after {
+  content: "]";
+}
 .dashboard .dash-cell .dash-content {
   max-height: 100%;
   overflow: hidden;

@@ -127,6 +127,8 @@ $text-color: darken($grey-blue, 20%);
   transition: border-color 1s;
   text-align: left;
 
+
+
   .dash-cell {
     position: relative;
     border: 2px solid $passive;
@@ -160,6 +162,18 @@ $text-color: darken($grey-blue, 20%);
         height: $dash-font-height;
         line-height: $dash-font-height;
       }
+    }
+
+    .keeb {
+      position: absolute;
+      left: 0.5rem;
+      top: -10px;
+      &:before { content: "["}
+      &:after { content: "]"}
+      background: $code-background;
+      padding: 0 5px;
+      height: $dash-font-height;
+      line-height: $dash-font-height;
     }
 
     .dash-content {
