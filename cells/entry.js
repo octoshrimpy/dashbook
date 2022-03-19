@@ -44,29 +44,32 @@ Entry.loadFromJSON = function(data, parent) {
 Entry.search = function(text) {
   var options = entries
   var segments = text.split("/")
-  var last = segments.pop()
+  var query = segments.pop()
 
   var path = segments.join("/")
-  if (segments.length > 0) {
+  if (path.length > 0) {
     options = options.filter(function(option) {
-      return option.path().toLowerCase().includes(path.toLowerCase())
+      return option.ancestors().map(function(entry) { return entry.path() }).includes(path)
     })
   }
 
-  return Text.filterOrder(last, options, function() {
+  return Text.filterOrder(query, options, function() {
     return this.name
   })
 }
-Entry.prototype.path = function() {
-  var generation = this
-  var path_arr = []
+Entry.prototype.ancestors = function(include_self) {
+  var generation = include_self ? this : this.parent
+  var tree = []
 
   while (generation) {
-    path_arr.push(generation.name)
+    tree.push(generation)
     generation = generation.parent
   }
 
-  return path_arr.reverse().join("/")
+  return tree.reverse()
+}
+Entry.prototype.path = function() {
+  return this.ancestors(true).map(function(entry) { return entry.name }).join("/")
 }
 
 var omnisearch = function() {
@@ -81,6 +84,7 @@ var omnisearch = function() {
 
     $(".dropup").append(drop_item)
   })
+  if ($(".drop-item.selected").length == 0) { $(".drop-item").first().addClass("selected") }
 }
 
 $(".ctr-dashboard").ready(function() {
@@ -125,15 +129,13 @@ $(".ctr-dashboard").ready(function() {
         // first because CSS reverses order
         $(".drop-item").last().addClass("selected")
       }
-    } else if (evt.key == "Tab") {
+    } else if (evt.key == "Tab" || evt.key == "Enter") {
       $(".dashboard-omnibar input").val($(".drop-item.selected").children(".name").text() + "/")
       $(".dashboard-omnibar input").focus()
     } else if (evt.key == "Escape") {
       evt.preventDefault()
       evt.stopPropagation()
       $(".dashboard-omnibar input").blur()
-    } else {
-      console.log(evt.key);
     }
   })
 
