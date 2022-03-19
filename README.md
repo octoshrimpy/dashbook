@@ -8,6 +8,7 @@
 - [ ] modify tags on entries
 - [ ] everything is accessible from omnibar
 - [ ] no mouse necessary
+  - [ ] use 1 through 4 to access panels in omnibar, 0 to clear input
 
 
 ### V2
