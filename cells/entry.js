@@ -64,7 +64,11 @@ $(".ctr-dashboard").ready(function() {
   $(".dashboard-omnibar input").on("keyup", function(evt) {
     $(".drop-item").remove()
     Entry.search($(this).val()).forEach(function(entry) {
-      $(".dropup").append($("<div>", { class: "drop-item" }).text(entry.path()))
+      var drop_item = $("<div>", { class: "drop-item" }).text(entry.path())
+      var summary = $("<div>", { class: "summary" }).text(entry.summary)
+      if (entry.summary && entry.summary.length > 0) { drop_item.append(summary) }
+
+      $(".dropup").append(drop_item)
     })
   })
 })
