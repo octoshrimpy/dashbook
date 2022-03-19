@@ -34,14 +34,18 @@ $text-color: darken($grey-blue, 20%);
   right: 0;
   bottom: 0;
   left: 0;
-  padding: 10px;
+  margin: 10px;
+  border: 2px solid rgba($grey-blue, 0.5);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
 
   input[type=text] {
     margin: 4px auto;
-    border: 2px solid rgba($grey-blue, 0.5);
-    border-radius: 4px;
     background: $code-background;
     padding: 8px;
+    border: unset;
     width: 100%;
     color: lightgrey;
     font-family: monospace;
@@ -49,6 +53,12 @@ $text-color: darken($grey-blue, 20%);
 
     &:focus {
       outline: none;
+    }
+  }
+
+  .dropup {
+    .drop-item {
+      padding: 0.5rem;
     }
   }
 }
