@@ -130,8 +130,13 @@ $(".ctr-dashboard").ready(function() {
         $(".drop-item").last().addClass("selected")
       }
     } else if (evt.key == "Tab" || evt.key == "Enter") {
-      $(".dashboard-omnibar input").val($(".drop-item.selected").children(".name").text() + "/")
-      $(".dashboard-omnibar input").focus()
+      if ($(".drop-item.selected").length > 0) {
+        $(".dashboard-omnibar input").val($(".drop-item.selected").children(".name").text() + "/")
+        $(".dashboard-omnibar input").focus()
+      } else if ($(".dashboard-omnibar input").val() == "") {
+        $(".dashboard-omnibar input").val("/")
+        $(".dashboard-omnibar input").focus()
+      }
     } else if (evt.key == "Escape") {
       evt.preventDefault()
       evt.stopPropagation()
