@@ -44,6 +44,9 @@
 .dashboard-omnibar input[type=text]:focus {
   outline: none;
 }
+.dashboard-omnibar .dropup {
+  background: #112435;
+}
 .dashboard-omnibar .dropup .drop-item {
   padding: 0.5rem;
 }

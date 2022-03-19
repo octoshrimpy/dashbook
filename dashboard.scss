@@ -57,6 +57,8 @@ $text-color: darken($grey-blue, 20%);
   }
 
   .dropup {
+    background: $code-background;
+    
     .drop-item {
       padding: 0.5rem;
     }
