@@ -43,19 +43,33 @@ Entry.loadFromJSON = function(data, parent) {
 }
 Entry.search = function(text) {
   var options = entries
-  var segments = text.split("/")
-  var query = segments.pop()
+  var match_type = "name"
 
-  var path = segments.join("/")
+  if (/\".*?\"/.test(text)) {
+    match_type = "all"
+    var quotes = text.match(/\"(.*?)\"/)
+    var query = quotes[1]
+    var path = text.replace(quotes[0], "")
+  } else {
+    var segments = text.split("/")
+    var query = segments.pop()
+    var path = segments.join("/")
+  }
+  path = path.trim().replace(/\/$/, "")
+
   if (path.length > 0) {
     options = options.filter(function(option) {
       return option.ancestors().map(function(entry) { return entry.path() }).includes(path)
     })
   }
 
-  return Text.filterOrder(query, options, function() {
-    return this.name
-  })
+  if (match_type == "name") {
+    var transformer = function() { return this.name }
+  } else if (match_type == "all") {
+    var transformer = function() { return this.allContent() }
+  }
+
+  return Text.filterOrder(query, options, transformer)
 }
 Entry.prototype.ancestors = function(include_self) {
   var generation = include_self ? this : this.parent
@@ -70,6 +84,9 @@ Entry.prototype.ancestors = function(include_self) {
 }
 Entry.prototype.path = function() {
   return this.ancestors(true).map(function(entry) { return entry.name }).join("/")
+}
+Entry.prototype.allContent = function(include_self) {
+  return [this.name, this.summary, this.description].join(" ")
 }
 
 var omnisearch = function() {
