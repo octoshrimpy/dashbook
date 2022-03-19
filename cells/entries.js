@@ -12,11 +12,39 @@ Entry.loadFromJSON([
         subtype: "region",
         children: [
           {
+            name: "Johnny Slinger",
+            summary: "ruthless mercenary from the jungles",
+            description: "",
+            type: "npc",
+            subtype: "bad"
+          },
+          {
+            name: "Crash",
+            summary: "Underling for Johnny Slinger",
+            description: "",
+            type: "npc",
+            subtype: "bad"
+          },
+          {
+            name: "Cooper",
+            summary: "Underling for Johnny Slinger",
+            description: "",
+            type: "npc",
+            subtype: "bad"
+          },
+          {
             name: "jurgaen",
             summary: "treehouse town just below the high canopies",
             type: "place",
             subtype: "city",
             children: [
+              {
+                name: "Nathaniel Blacke",
+                summary: "thin, but muscled. clean-shaven",
+                description: "younger brother killed by Johnny Slinger",
+                type: "npc",
+                subtype: "good"
+              },
               {
                 name: "Tilted Anvil",
                 summary: "Blacksmith shop owned by  Nathaniel",
