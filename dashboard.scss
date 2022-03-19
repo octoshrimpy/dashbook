@@ -173,7 +173,11 @@ $text-color: darken($grey-blue, 20%);
       background: $code-background;
       padding: 0 5px;
       height: $dash-font-height;
-      line-height: $dash-font-height;
+      color: $active;
+    }
+
+    &.active .keeb {
+      color: $active-bright;
     }
 
     .dash-content {

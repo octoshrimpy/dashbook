@@ -179,13 +179,16 @@
   background: #112435;
   padding: 0 5px;
   height: 0.9rem;
-  line-height: 0.9rem;
+  color: #337BCD;
 }
 .dashboard .dash-cell .keeb:before {
   content: "[";
 }
 .dashboard .dash-cell .keeb:after {
   content: "]";
+}
+.dashboard .dash-cell.active .keeb {
+  color: #5DA6F8;
 }
 .dashboard .dash-cell .dash-content {
   max-height: 100%;
