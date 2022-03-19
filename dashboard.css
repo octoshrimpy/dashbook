@@ -70,17 +70,16 @@
   justify-content: flex-end;
 }
 .dashboard-omnibar .dropup .drop-item:first-of-type {
-  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
 }
 .dashboard-omnibar .dropup .drop-item:last-of-type {
-  margin-bottom: 0.25rem;
+  margin-top: 0.25rem;
 }
 .dashboard-omnibar .dropup .drop-item.selected {
   background: #1F4A7B;
 }
 .dashboard-omnibar .dropup .drop-item.selected .summary {
   opacity: 0.75;
-  font-style: italic;
 }
 
 @-webkit-keyframes flashdash {
@@ -219,7 +218,7 @@
   cursor: pointer;
   position: absolute;
   right: 0.5rem;
-  bottom: 1rem;
+  bottom: 0.75rem;
   opacity: 0.5;
   background: #337BCD;
   border-radius: 999px;
