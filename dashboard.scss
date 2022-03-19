@@ -1,4 +1,5 @@
 // https://jsonformatter.org/scss-to-css
+@import "./_octolib.scss";
 
 $dash-font-height: 0.9rem;
 $dash-font-width: $dash-font-height * 0.5;
@@ -30,16 +31,25 @@ $text-color: darken($grey-blue, 20%);
   100% { border-color: $active; }
 }
 
+html, body {
+  margin:0;
+  padding: 0;
+}
+
 .html-ctr-dashboard {
-  background: $code-background;
   width: 100%;
   height: 100%;
   &, * { box-sizing: border-box; }
 
   .ctr-dashboard {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
     margin: 0;
     background: $code-background;
-    padding: 10px;
+    padding: 1rem;
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -120,10 +130,12 @@ $text-color: darken($grey-blue, 20%);
 
 
 .dashboard {
+  width: 100%;
+  height: 100%;
   row-gap: $dash-font-height;
   display: inline-grid;
-  grid-template-columns: repeat(4, 241px);
-  grid-template-rows: repeat(5, 144px);
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
   column-gap: 3px;
   transition: border-color 1s;
   text-align: left;
@@ -156,9 +168,9 @@ $text-color: darken($grey-blue, 20%);
       top: -10px;
       width: 100%;
       text-align: center;
+      background: $code-background;
 
       span {
-        background: $code-background;
         padding: 0 5px;
         height: $dash-font-height;
         line-height: $dash-font-height;
@@ -277,6 +289,79 @@ $text-color: darken($grey-blue, 20%);
     .bg:after {
       pointer-events: all;
       opacity: 1;
+    }
+  }
+}
+
+body.material {
+
+  .ctr-dashboard {  
+    background: $silver; 
+
+    .dashboard {
+      grid-gap: 1rem;  
+    }
+  }
+  
+  .dash-cell {
+    padding-top: 2rem;
+    background: $clouds;
+    border: 0;
+    box-shadow: $shadow-border;
+    border-radius: 3px;
+    @include animate;
+
+    .keeb, .dash-title {
+      top: 0.25rem;
+      background: transparent;
+
+      color: $bulma-black;
+    }
+    .dash-title {
+      text-align: right;
+      padding-right: 1rem;
+    }
+
+    &.active {
+      box-shadow: $shadow-3;
+      background: white;
+      .keeb, .dash-title {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .dashboard-omnibar {
+    background: $clouds;
+    border: 0;
+    @include animate;
+
+    box-shadow: $shadow-border;
+    border-radius: 3px;
+
+    &:focus-within {
+      box-shadow: $shadow-2;
+      background: white;
+
+      input {
+      }
+    }
+
+    input {
+      background: transparent;
+      color: $bulma-black;
+    }
+  }
+  .dropup {
+    background: $clouds;
+
+    .drop-item {
+      color: $bulma-black;
+
+      &.selected {
+        background: white;
+        font-weight: bold;
+      }
     }
   }
 }
