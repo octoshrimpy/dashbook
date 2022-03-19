@@ -53,8 +53,8 @@ Entry.search = function(text) {
     })
   }
 
-  return Text.filterOrder(text, options, function() {
-    return this.path()
+  return Text.filterOrder(last, options, function() {
+    return this.name
   })
 }
 Entry.prototype.path = function() {
