@@ -2,6 +2,51 @@
   box-sizing: border-box;
 }
 
+@-webkit-keyframes flashdash {
+  0% {
+    border-color: #1F4A7B;
+  }
+  10% {
+    border-color: #337BCD;
+  }
+  100% {
+    border-color: #1F4A7B;
+  }
+}
+
+@keyframes flashdash {
+  0% {
+    border-color: #1F4A7B;
+  }
+  10% {
+    border-color: #337BCD;
+  }
+  100% {
+    border-color: #1F4A7B;
+  }
+}
+@-webkit-keyframes flashdashactive {
+  0% {
+    border-color: #337BCD;
+  }
+  10% {
+    border-color: #5DA6F8;
+  }
+  100% {
+    border-color: #337BCD;
+  }
+}
+@keyframes flashdashactive {
+  0% {
+    border-color: #337BCD;
+  }
+  10% {
+    border-color: #5DA6F8;
+  }
+  100% {
+    border-color: #337BCD;
+  }
+}
 .html-ctr-dashboard {
   background: #112435;
   width: 100%;
@@ -56,6 +101,7 @@
   flex-direction: column-reverse;
 }
 .dashboard-omnibar .dropup .drop-item {
+  cursor: pointer;
   padding: 0.5rem;
   transition: all 0.15s ease-in-out;
   display: flex;
@@ -82,51 +128,6 @@
   opacity: 0.75;
 }
 
-@-webkit-keyframes flashdash {
-  0% {
-    border-color: #1F4A7B;
-  }
-  10% {
-    border-color: #337BCD;
-  }
-  100% {
-    border-color: #1F4A7B;
-  }
-}
-
-@keyframes flashdash {
-  0% {
-    border-color: #1F4A7B;
-  }
-  10% {
-    border-color: #337BCD;
-  }
-  100% {
-    border-color: #1F4A7B;
-  }
-}
-@-webkit-keyframes flashdashactive {
-  0% {
-    border-color: #337BCD;
-  }
-  10% {
-    border-color: #5DA6F8;
-  }
-  100% {
-    border-color: #337BCD;
-  }
-}
-@keyframes flashdashactive {
-  0% {
-    border-color: #337BCD;
-  }
-  10% {
-    border-color: #5DA6F8;
-  }
-  100% {
-    border-color: #337BCD;
-  }
-}
 .dashboard {
   row-gap: 0.9rem;
   display: inline-grid;

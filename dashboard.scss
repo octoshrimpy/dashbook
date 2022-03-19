@@ -17,6 +17,18 @@ $text-color: darken($grey-blue, 20%);
   box-sizing: border-box;
 }
 
+
+@keyframes flashdash {
+  0%   { border-color: $passive; }
+  10%  { border-color: $active; }
+  100% { border-color: $passive; }
+}
+@keyframes flashdashactive {
+  0%   { border-color: $active; }
+  10%  { border-color: $active-bright; }
+  100% { border-color: $active; }
+}
+
 .html-ctr-dashboard {
   background: $code-background;
   width: 100%;
@@ -72,6 +84,7 @@ $text-color: darken($grey-blue, 20%);
     flex-direction: column-reverse;
     
     .drop-item {
+      cursor: pointer;
       padding: 0.5rem;
       @include animate;
       display: flex;
@@ -104,16 +117,6 @@ $text-color: darken($grey-blue, 20%);
   }
 }
 
-@keyframes flashdash {
-  0%   { border-color: $passive; }
-  10%  { border-color: $active; }
-  100% { border-color: $passive; }
-}
-@keyframes flashdashactive {
-  0%   { border-color: $active; }
-  10%  { border-color: $active-bright; }
-  100% { border-color: $active; }
-}
 
 .dashboard {
   row-gap: $dash-font-height;
