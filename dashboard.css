@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .html-ctr-dashboard {
   background: #112435;
   width: 100%;
@@ -46,9 +50,20 @@
 }
 .dashboard-omnibar .dropup {
   background: #112435;
+  width: 100%;
+  display: flex;
+  padding: 0.25rem;
+  flex-direction: column-reverse;
 }
 .dashboard-omnibar .dropup .drop-item {
   padding: 0.5rem;
+  transition: all 0.15s ease-in-out;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+.dashboard-omnibar .dropup .drop-item.selected {
+  background: #1F4A7B;
 }
 
 @-webkit-keyframes flashdash {

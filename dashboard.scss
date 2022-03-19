@@ -1,13 +1,21 @@
 // https://jsonformatter.org/scss-to-css
 
-$code-background: #112435;
 $dash-font-height: 0.9rem;
 $dash-font-width: $dash-font-height * 0.5;
-$active-bright: #5DA6F8;
-$active: #337BCD;
-$passive: #1F4A7B;
-$grey-blue: #6481A1;
+$code-background: #112435;
+$passive        : #1F4A7B;
+$grey-blue      : #6481A1;
+$active         : #337BCD;
+$active-bright  : #5DA6F8;
 $text-color: darken($grey-blue, 20%);
+
+@mixin animate() {
+  transition: all 0.15s ease-in-out;
+}
+
+* {
+  box-sizing: border-box;
+}
 
 .html-ctr-dashboard {
   background: $code-background;
@@ -58,9 +66,22 @@ $text-color: darken($grey-blue, 20%);
 
   .dropup {
     background: $code-background;
+    width: 100%;
+    display: flex;
+    padding: 0.25rem;
+    flex-direction: column-reverse;
     
     .drop-item {
       padding: 0.5rem;
+      @include animate;
+      display: flex;
+      justify-content: flex-start;
+      width: 100%;
+      
+      &.selected {
+        background: $passive;
+
+      }
     }
   }
 }
