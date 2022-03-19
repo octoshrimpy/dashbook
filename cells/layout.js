@@ -51,5 +51,12 @@ $(".ctr-dashboard").ready(function() {
     y: 1,
     w: 2,
     h: 4,
+    command: function(msg, cell) {
+      if (msg == "-") {
+        cell.lines(entries.map(function(entry) { return entry.name }))
+      } else {
+        cell.lines(Entry.search(msg))
+      }
+    }
   })
 })

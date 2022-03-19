@@ -1,5 +1,5 @@
 $(".ctr-dashboard").ready(function() {
-  notes = Cell.init({
+  Cell.init({
     title: "Notes",
     h: 2,
     w: 2,
