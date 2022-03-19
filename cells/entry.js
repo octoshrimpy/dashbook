@@ -141,6 +141,17 @@ $(".ctr-dashboard").ready(function() {
       evt.preventDefault()
       evt.stopPropagation()
       $(".dashboard-omnibar input").blur()
+    } else if (evt.altKey && /Digit\d/.test(evt.code)) {
+      evt.preventDefault()
+
+      var selector = $(".keeb[dataIdx=" + evt.code.match(/\d/)[0] + "]").attr("dataSelector")
+
+      var raw = $(".dashboard-omnibar input").val()
+      var old_selector = raw.match(/\:(\w|\-)+ ?/i)
+      old_selector = old_selector ? old_selector[0] : ""
+      raw = raw.replace(old_selector, "")
+
+      $(".dashboard-omnibar input").val(":" + selector + " " + raw)
     }
   })
 
