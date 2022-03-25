@@ -53,15 +53,43 @@ $(".ctr-dashboard").ready(function() {
     w: 2,
     h: 4,
     data: { idx: idx += 1 },
+    commands: {
+      clear: function(cell) {
+        localStorage.removeItem("secondary_notes")
+        cell.text("")
+      }
+    },
     reloader: function(cell) {
       populateKeeb(cell)
-    },
-    command: function(msg, cell) {
-      if (msg == "-") {
-        cell.lines(entries.map(function(entry) { return entry.name }))
+      if (localStorage.getItem("secondary_notes") == null) {
+        var lines = []
+        lines.push("Click on this cell to select Notes")
+        lines.push("Enter any text to add as an item to the list.")
+        lines.push("Type - followed by a number to remove that item from the list. For example: '-3' will remove this item")
+        lines.push("Use '.clear' to completely empty all notes.")
+        lines.push("This message will reappear after a reload if '.clear' is used, but not if you remove the lines one by one.")
+        lines.push("Cells can be positioned specifically and resized, but will default to 1x1 and left-right top-bottom.")
+        lines = Text.numberedList(lines)
+        localStorage.setItem("secondary_notes", lines.join("\n"))
+        cell.lines(lines)
       } else {
-        cell.lines(Entry.search(msg))
+        cell.text(localStorage.getItem("secondary_notes"))
       }
+    },
+    command: function(text, cell) {
+      if (/^-\d+$/.test(text)) {
+        var num = parseInt(text.match(/\d+/)[0])
+        var lines = cell.text().split("\n")
+        lines.splice(num-1, 1)
+      } else {
+        var lines = cell.text() ? cell.text().split("\n") : []
+        lines.push(text)
+      }
+
+      var note = Text.numberedList(lines).join("\n")
+
+      localStorage.setItem("secondary_notes", note)
+      cell.text(note)
     }
   })
 

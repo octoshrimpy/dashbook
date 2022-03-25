@@ -45,8 +45,8 @@ html, body {
     position: absolute;
     top: 0;
     right: 0;
-    left: 0;
     bottom: 0;
+    left: 0;
     margin: 0;
     background: $code-background;
     padding: 1rem;
@@ -61,22 +61,22 @@ html, body {
 }
 
 .dashboard-omnibar {
+  display: flex;
   position: fixed;
   right: 0;
   bottom: 0;
   left: 0;
+  flex-direction: column-reverse;
+  align-items: flex-start;
   margin: 10px;
   border: 2px solid rgba($grey-blue, 0.5);
   border-radius: 4px;
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: flex-start;
 
   input[type=text] {
     margin: 4px auto;
+    border: unset;
     background: $code-background;
     padding: 8px;
-    border: unset;
     width: 100%;
     color: lightgrey;
     font-family: monospace;
@@ -88,12 +88,12 @@ html, body {
   }
 
   .dropup {
-    background: $code-background;
-    width: 100%;
     display: flex;
-    padding: 0 0.25rem;
     flex-direction: column-reverse;
-    
+    background: $code-background;
+    padding: 0 0.25rem;
+    width: 100%;
+
     .drop-item {
       cursor: pointer;
       padding: 0.5rem;
@@ -103,13 +103,13 @@ html, body {
       width: 100%;
 
       .summary {
-        flex: 1;
         display: flex;
+        flex: 1;
+        justify-content: flex-end;
         opacity: 0.5;
         font-style: italic;
-        justify-content: flex-end;
       }
-      
+
       &:first-of-type {
         margin-bottom: 0.25rem;
       }
@@ -130,14 +130,14 @@ html, body {
 
 
 .dashboard {
-  width: 100%;
-  height: 100%;
   row-gap: $dash-font-height;
   display: inline-grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(5, 1fr);
   column-gap: 3px;
   transition: border-color 1s;
+  width: 100%;
+  height: 100%;
   text-align: left;
 
 
@@ -168,7 +168,7 @@ html, body {
       top: -10px;
       width: 100%;
       text-align: center;
-      
+
       span {
         background: $code-background;
         padding: 0 5px;
@@ -179,14 +179,14 @@ html, body {
 
     .keeb {
       position: absolute;
-      left: 0.5rem;
       top: -10px;
-      &:before { content: "["}
-      &:after { content: "]"}
+      left: 0.5rem;
       background: $code-background;
       padding: 0 5px;
       height: $dash-font-height;
       color: $active;
+      &:before { content: "["}
+      &:after { content: "]"}
     }
 
     &.active .keeb {
@@ -212,9 +212,9 @@ html, body {
         height: $dash-font-height;
         line-height: $dash-font-height;
       }
-      e { // Double width
+      e {
         width: $dash-font-width*2;
-        font-family: emoji;
+        font-family: emoji; // Double width
         // font-size: $dash-font-height*0.75;
       }
     }
@@ -224,7 +224,7 @@ html, body {
 
 .font-selector {
   display: none;
-  
+
   &:checked ~ .ctr-dashboard{
     font-family: "terminess", monospace;
 
@@ -232,8 +232,8 @@ html, body {
       background: $code-background;
       .bg {
         &:before {
-          background: $active;
           left: 1rem;
+          background: $active;
         }
         &:after {
           content: "Terminess";
@@ -245,15 +245,15 @@ html, body {
 
 .font-selector-label {
   @include animate;
-  border: 1px solid $active;
-  cursor: pointer;
   position: absolute;
   right: 0.5rem;
   bottom: 0.75rem;
   opacity: 0.5;
+  cursor: pointer;
+  border: 1px solid $active;
+  border-radius: 999px;
 
   background: $active;
-  border-radius: 999px;
   width: 2.5rem;
   height: 1.5rem;
 
@@ -262,53 +262,53 @@ html, body {
 
     &:before {
       @include animate;
-      content: '';
-      margin: 0.25rem;
-      left: 0rem;
       display: inline;
       position: absolute;
-      height: 0.9rem;
-      width: 1rem;
-      background: $code-background;
+      left: 0rem;
+      margin: 0.25rem;
       border-radius: 999px;
+      background: $code-background;
+      width: 1rem;
+      height: 0.9rem;
+      content: '';
     }
 
     &:after {
       @include animate;
-      pointer-events: none;
-      opacity: 0;
-      content: "Jetbrains";
       position: absolute;
-      right: calc(100% + 0.5rem);
       top: 0.25rem;
+      right: calc(100% + 0.5rem);
+      opacity: 0;
+      pointer-events: none;
+      content: "Jetbrains";
     }
   }
 
   &:hover {
     opacity: 1;
     .bg:after {
-      pointer-events: all;
       opacity: 1;
+      pointer-events: all;
     }
   }
 }
 
 body.material {
 
-  .ctr-dashboard {  
-    background: $silver; 
+  .ctr-dashboard {
+    background: $silver;
 
     .dashboard {
-      grid-gap: 1rem;  
+      grid-gap: 1rem;
     }
   }
-  
+
   .dash-cell {
-    padding-top: 2rem;
-    background: $clouds;
-    border: 0;
     box-shadow: $shadow-border;
+    border: 0;
     border-radius: 3px;
+    background: $clouds;
+    padding-top: 2rem;
     @include animate;
 
     .keeb, .dash-title {
@@ -318,9 +318,9 @@ body.material {
       color: $bulma-black;
     }
     .dash-title {
-      text-align: right;
-      padding-right: 1rem;
       background: transparent;
+      padding-right: 1rem;
+      text-align: right;
     }
 
     &.active {
@@ -333,12 +333,12 @@ body.material {
   }
 
   .dashboard-omnibar {
-    background: $clouds;
-    border: 0;
-    @include animate;
 
     box-shadow: $shadow-border;
+    border: 0;
     border-radius: 3px;
+    background: $clouds;
+    @include animate;
 
     &:focus-within {
       box-shadow: $shadow-2;
